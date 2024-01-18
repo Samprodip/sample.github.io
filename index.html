@@ -34,6 +34,23 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style> 
+    .roww{
+      flex-wrap: nowrap;
+    }
+    .clients .row {
+      animation: scrollClients 20s linear infinite;
+    }
+    @keyframes scrollClients {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }    
+  </style>
 </head>
 
 <body>
@@ -163,7 +180,7 @@
     <section id="clients" class="clients">
       <div class="container">
 
-        <div class="row">
+        <div class="row roww">
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="100">
             <img src="assets/new/clients/Aditya-Birla-logo.png" class="img-fluid" alt="">
@@ -187,6 +204,18 @@
 
           <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
             <img src="assets/new/clients/Orbit.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
+            <img src="assets\new\clients\rpsg_white_logo.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
+            <img src="assets\new\clients\simplex-logo.png" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="600">
+            <img src="assets\new\clients\tycoon.PNG" class="img-fluid" alt="">
           </div>
 
         </div>
@@ -821,6 +850,22 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Adjust the duration based on the number of clients and your preference
+      const animationDuration = 20; // in seconds
+    
+      // Calculate the animation duration based on the number of clients
+      const clientsContainer = document.querySelector(".clients .container");
+      const clientCount = document.querySelectorAll(".clients .col-lg-2").length;
+      const totalAnimationDuration = animationDuration * clientCount;
+    
+      // Set the animation duration dynamically
+      clientsContainer.style.animationDuration = `${totalAnimationDuration}s`;
+    });
+    
+  </script>
 
 </body>
 
