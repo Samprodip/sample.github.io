@@ -292,43 +292,42 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <script>
     const galleryContainer = document.getElementById('gallery');
+const folderPath = 'assets/new/AirportNOC';
 
-    // Specify the folder path where your images are located
-    const folderPath = 'assets/new/AirportNOC';
+fetchImages(folderPath);
 
-    // Fetch the list of images using FileReader
-    fetchImages(folderPath);
+function fetchImages(folderPath) {
+    fetch(folderPath)
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const links = doc.querySelectorAll('a');
 
-    function fetchImages(folderPath) {
-        fetch(folderPath)
-            .then(response => response.text())
-            .then(html => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const links = doc.querySelectorAll('a');
+            const imageLinks = Array.from(links)
+                .filter(link => link.href.match(/\.(jpe?g|png|gif)$/i))
+                .map(link => folderPath + link.pathname); // Use link.pathname to get the relative path
 
-                const imageLinks = Array.from(links)
-                    .filter(link => link.href.match(/\.(jpe?g|png|gif)$/i))
-                    .map(link => link.href);
+            console.log('Image Links:', imageLinks);
 
-                displayImages(imageLinks);
-            })
-            .catch(error => console.error('Error fetching images:', error));
-    }
+            displayImages(imageLinks);
+        })
+        .catch(error => console.error('Error fetching images:', error));
+}
 
-    function displayImages(images) {
-        // Dynamically populate the gallery
-        images.forEach(image => {
-            const imgContainer = document.createElement('div');
-            imgContainer.classList.add('image-container');
-            const img = document.createElement('img');
-            img.src = image;
-            img.alt = 'Gallery Image';
-            img.addEventListener('click', () => openModal(image));
-            imgContainer.appendChild(img);
-            galleryContainer.appendChild(imgContainer);
-        });
-    }
+function displayImages(images) {
+    images.forEach(image => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('image-container');
+        const img = document.createElement('img');
+        img.src = image;
+        img.alt = 'Gallery Image';
+        img.addEventListener('click', () => openModal(image));
+        imgContainer.appendChild(img);
+        galleryContainer.appendChild(imgContainer);
+    });
+}
+
 
 
 </script>
